@@ -91,6 +91,8 @@ ZedCamera::ZedCamera(const rclcpp::NodeOptions& options)
     if (!startCamera()) {
         exit(EXIT_FAILURE);
     }
+        
+    mParamChangeCallbackHandle = add_on_set_parameters_callback(std::bind(&ZedCamera::callback_paramChange, this, _1));
 }
 
 ZedCamera::~ZedCamera()
@@ -261,7 +263,7 @@ void ZedCamera::initParameters()
 
     // Dynamic parameters callback
     //set_on_parameters_set_callback(std::bind(&ZedCamera::callback_paramChange, this, _1)); // deprecated
-    mParamChangeCallbackHandle = add_on_set_parameters_callback(std::bind(&ZedCamera::callback_paramChange, this, _1));
+    //mParamChangeCallbackHandle = add_on_set_parameters_callback(std::bind(&ZedCamera::callback_paramChange, this, _1));
 }
 
 void ZedCamera::getDebugParams()
